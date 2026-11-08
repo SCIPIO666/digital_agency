@@ -1,0 +1,18 @@
+# dependencies
+node_modules
+
+# env
+.env*
+!.env.example
+
+# next.js
+.next
+next-env.d.ts
+/out/
+
+# misc
+.DS_Store
+*.pem
+
+# vercel
+.vercel

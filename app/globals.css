@@ -1,0 +1,463 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   NUEVAZEN DESIGN TOKENS
+   Source: ReddConcept_Wireframe_v3 (dark, lime-on-ink).
+   Tailwind v4 reads tokens from CSS. Every --color-*, --font-*, --text-*,
+   --radius-*, --shadow-*, --animate-* below becomes a utility automatically,
+   e.g. --color-primary-400 -> bg-primary-400 / text-primary-400 / border-primary-400
+   ========================================================================== */
+
+@theme {
+  /* ---------- PRIMARY: Lime (the brand signal) ---------- */
+  --color-primary-50: #f7fee7;
+  --color-primary-100: #ecfccb;
+  --color-primary-200: #d9f99d;
+  --color-primary-300: #bef264;
+  --color-primary-400: #a3e635; /* BRAND LIME, the wireframe's --lime */
+  --color-primary-500: #84cc16;
+  --color-primary-600: #65a30d;
+  --color-primary-700: #4d7c0f;
+  --color-primary-800: #3f6212;
+  --color-primary-900: #365314;
+  --color-primary-950: #1a2e05;
+
+  /* ---------- SECONDARY: Paper (warm off-white neutrals) ---------- */
+  --color-secondary-50: #faf9f6;
+  --color-secondary-100: #f5f3ee; /* wireframe --offw */
+  --color-secondary-200: #e7e5e0; /* wireframe --gray */
+  --color-secondary-300: #d4d1c9;
+  --color-secondary-400: #b8b4a9;
+  --color-secondary-500: #9b968c; /* wireframe muted text */
+  --color-secondary-600: #78746b;
+
+  /* ---------- ACCENT: Signal violet (used sparingly: glows, tags, highlights) ----------
+     Not in the wireframe. Chosen because it complements lime on near-black.
+     Swap these four values to re-theme the whole accent. */
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+
+  /* ---------- INK: dark surfaces, darkest to lightest ---------- */
+  --color-ink-950: #09090b; /* wireframe --char, the page background */
+  --color-ink-900: #0d0d0d; /* wireframe --wblack */
+  --color-ink-850: #141417; /* cards */
+  --color-ink-800: #1c1c20; /* raised / placeholder stripe A */
+  --color-ink-750: #232327; /* placeholder stripe B */
+  --color-ink-700: #2a2a2e; /* borders */
+  --color-ink-600: #3a3a40; /* strong borders, disabled */
+  --color-ink-500: #4a4a50; /* placeholder text */
+
+  /* ---------- STATUS ---------- */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #38bdf8;
+
+  /* ---------- SEMANTIC ROLES (light paper surfaces and dark text) ---------- */
+  --color-background: #faf9f6;
+  --color-foreground: #171713;
+  --color-card: #fffefa;
+  --color-card-raised: #f1eee7;
+  --color-border: #dedbd2;
+  --color-border-strong: #c4c0b6;
+  --color-muted: #77766f;
+  --color-body: #45443e;
+  --color-primary: var(--color-primary-600);
+  --color-primary-hover: var(--color-primary-700);
+  --color-on-primary: #171713;
+  --color-secondary: #f1eee7;
+  --color-on-secondary: #171713;
+  --color-accent: var(--color-accent-500);
+  --color-ring: var(--color-primary-400);
+
+  /* ---------- TYPOGRAPHY ----------
+     Fonts are loaded in app/layout.tsx and exposed as CSS variables. */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-crimson), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-crimson), Georgia, "Times New Roman", serif;
+
+  /* Fluid sizes lifted from the wireframe's clamp() values.
+     Use as text-hero, text-title, etc. Line-height comes with the size. */
+  --text-hero: clamp(2rem, 4.8vw, 3.625rem);
+  --text-hero--line-height: 1.1;
+  --text-reality: clamp(1.5rem, 4.2vw, 3.375rem);
+  --text-reality--line-height: 1.5;
+  --text-title: clamp(1.5rem, 2.8vw, 2.375rem);
+  --text-title--line-height: 1.2;
+  --text-heading: clamp(1.375rem, 2.4vw, 2rem);
+  --text-heading--line-height: 1.25;
+  --text-lead: clamp(0.875rem, 1.1vw, 1rem);
+  --text-lead--line-height: 1.7;
+  --text-quote: clamp(1rem, 1.5vw, 1.3125rem);
+  --text-quote--line-height: 1.55;
+  --text-mega: clamp(2.5rem, 5.4vw, 5.5rem);
+  --text-mega--line-height: 0.95;
+  --text-mega--letter-spacing: -0.02em;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+
+  --tracking-eyebrow: 0.14em;
+  --tracking-nav: 0.03em;
+
+  /* ---------- RADIUS (wireframe: 2 / 3 / 4 / 6 / 8 / 12) ---------- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px; /* buttons */
+  --radius-lg: 8px; /* cards */
+  --radius-xl: 12px; /* hero visual */
+  --radius-2xl: 16px;
+
+  /* ---------- SHADOWS & GLOWS ---------- */
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 8px 24px -12px rgb(25 25 20 / 0.22);
+  --shadow-lift: 0 18px 40px -16px rgb(25 25 20 / 0.3);
+  --shadow-glow: 0 0 24px rgb(101 163 13 / 0.24);
+  --shadow-glow-strong: 0 0 14px rgb(101 163 13 / 0.38);
+  --shadow-glow-accent: 0 0 28px rgb(139 92 246 / 0.2);
+  --shadow-focus: 0 0 0 4px rgb(101 163 13 / 0.3);
+
+  /* ---------- LAYOUT ---------- */
+  --container-prose: 36rem; /* 576px, paragraph width */
+  --container-section: 56.25rem; /* 900px, card grids */
+  --container-wide: 68.75rem; /* 1100px, footer */
+  --container-page: 75rem; /* 1200px, hero */
+  --breakpoint-xs: 30rem; /* 480px. sm/md/lg stay Tailwind defaults (640/768/1024) */
+
+  /* ---------- MOTION ---------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-engine-pulse: engine-pulse 3s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.6s var(--ease-out-expo) both;
+  --animate-fade-in: fade-in 0.5s var(--ease-soft) both;
+
+  @keyframes engine-pulse {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 0 rgb(163 230 53 / 0));
+    }
+    50% {
+      filter: drop-shadow(0 0 14px rgb(163 230 53 / 0.55));
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* ==========================================================================
+   GRADIENTS (Tailwind has no gradient namespace, so these are utilities)
+   Usage: <div class="bg-grad-brand"> ... or text-grad-brand on a heading
+   ========================================================================== */
+
+/* Solid-feeling lime with a light top-left and deeper bottom-right */
+@utility bg-grad-brand {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary-200) 0%,
+    var(--color-primary-400) 45%,
+    var(--color-primary-600) 100%
+  );
+}
+/* Lime into violet, for hero highlights and featured cards */
+@utility bg-grad-signal {
+  background-image: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-accent-500) 100%);
+}
+/* Card surface that fades slightly toward the page background */
+@utility bg-grad-surface {
+  background-image: linear-gradient(180deg, #fffefa 0%, #f1eee7 100%);
+}
+/* Soft lime light from the top edge, for section/hero backgrounds */
+@utility bg-glow-lime {
+  background-image: radial-gradient(ellipse 60% 50% at 50% 0%, rgb(163 230 53 / 0.2), transparent 70%);
+}
+/* Violet light from a corner, pairs with bg-glow-lime */
+@utility bg-glow-accent {
+  background-image: radial-gradient(ellipse 50% 45% at 100% 0%, rgb(139 92 246 / 0.09), transparent 70%);
+}
+/* Fades into the page background, for image overlays and section edges */
+@utility bg-fade-down {
+  background-image: linear-gradient(180deg, transparent 0%, rgb(250 249 246 / 0.9) 100%);
+}
+/* Gradient text */
+@utility text-grad-brand {
+  background-image: linear-gradient(90deg, var(--color-primary-200), var(--color-primary-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-grad-signal {
+  background-image: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Fine film grain, used softly over gradients (inline SVG noise, no image file) */
+@utility bg-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
+}
+/* The diagonal-stripe image placeholder from the wireframe (hero / service cards) */
+@utility bg-placeholder {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #f0eee8,
+    #f0eee8 8px,
+    #e8e5dc 8px,
+    #e8e5dc 16px
+  );
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: var(--color-primary-400);
+    color: var(--color-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   COMPONENT CLASSES (reusable patterns that would otherwise repeat long
+   class lists). Prefer a React component for anything with logic.
+   ========================================================================== */
+
+@layer components {
+  /* Animista trial: reveal the light hero panel, then its label and headline. */
+  .hero-panel-reveal {
+    animation: hero-panel-reveal 800ms ease-out both;
+  }
+  .text-focus-in {
+    animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 800ms both;
+  }
+  .text-pop-up-top {
+    animation: text-pop-up-top 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.8s both;
+  }
+  .supporting-copy-focus {
+    animation-delay: 2.3s;
+  }
+  .hero-copy-follow {
+    opacity: 0;
+    animation: hero-copy-follow 650ms ease-out 2.3s both;
+  }
+
+  @keyframes hero-panel-reveal {
+    from { background-color: #f1eee7; }
+    to { background-color: #fffefa; }
+  }
+  @keyframes text-focus-in {
+    from { filter: blur(12px); opacity: 0; }
+    to { filter: blur(0); opacity: 1; }
+  }
+  @keyframes text-pop-up-top {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+      transform-origin: 50% 50%;
+      text-shadow: none;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      transform-origin: 50% 50%;
+      text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgb(0 0 0 / 0.3);
+    }
+  }
+  @keyframes hero-copy-follow {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-panel-reveal,
+    .text-focus-in,
+    .text-pop-up-top,
+    .hero-copy-follow {
+      animation-delay: 0s !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .text-pop-up-top { animation-delay: 800ms; }
+    .supporting-copy-focus { animation-delay: 1.3s; }
+    .hero-copy-follow { animation-delay: 1.3s; }
+  }
+
+/* Full-screen tile menu: warm editorial tiles around a tall brand panel.
+   Seven tiles fill a 4 x 2 area exactly, with no empty cell:
+     row 1: Home | Services (x2) | Process
+     row 2: Case Studies | Reviews | Company | Contact
+   Mobile first: two columns, and the last tile spans both so there is no gap.
+   Colours hang off data-tile (the route), so reordering items never shifts them. */
+.menu-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.menu-intro { grid-column: 1 / -1; min-height: 12rem; }
+.menu-tile { min-height: 12rem; }
+.menu-tile:last-child { grid-column: 1 / -1; }
+.menu-footer { grid-column: 1 / -1; }
+
+.menu-tile[data-tile="home"] { background: #ffb768; }
+.menu-tile[data-tile="services"] { background: #ffb9a7; }
+.menu-tile[data-tile="process"] { background: #064b50; color: #fff7eb; }
+.menu-tile[data-tile="case-studies"] { background: #d4d2cf; }
+.menu-tile[data-tile="reviews"] { background: #d8e4b8; }
+.menu-tile[data-tile="company"] { background: #f0440a; color: #fff7eb; }
+.menu-tile[data-tile="contact"] { background: #bef264; }
+
+.menu-tile a { transition: filter 250ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-tile:hover a { filter: saturate(1.08); transform: scale(1.015); }
+
+@media (min-width: 1024px) {
+  .menu-page-grid {
+    grid-template-columns: minmax(12rem, 0.95fr) repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(10rem, 1fr)) auto; /* two tile rows share the height; footer is auto */
+  }
+  .menu-intro { grid-column: 1; grid-row: 1 / span 3; min-height: 0; } /* full height, no hole under it */
+  .menu-tile { min-height: 0; }
+  .menu-tile:last-child { grid-column: auto; }
+  .menu-tile[data-tile="services"] { grid-column: span 2; }
+  .menu-footer { grid-column: 2 / -1; grid-row: 3; }
+}
+
+  /* Primary lime button (wireframe .lime-btn) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4375rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      filter 0.15s var(--ease-soft),
+      background-color 0.15s var(--ease-soft),
+      border-color 0.15s var(--ease-soft),
+      transform 0.15s var(--ease-soft);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
+    box-shadow: var(--shadow-focus);
+  }
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .btn-primary:hover {
+    filter: brightness(0.92);
+  }
+  /* Use when a lime button sits on a light (paper) surface: adds the border the wireframe calls for */
+  .btn-primary-on-light {
+    border: 1.5px solid var(--color-foreground);
+  }
+  .btn-outline {
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-foreground);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .btn-lg {
+    padding: 0.8125rem 1.625rem;
+    font-size: 0.875rem;
+  }
+
+  /* Small uppercase label above a section heading (wireframe .eyebrow) */
+  .eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: var(--text-eyebrow--line-height);
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-primary-700);
+  }
+
+  /* Light card with a subtle hairline border. */
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Section wrapper: top divider + standard vertical rhythm */
+  .section {
+    border-top: 1px solid rgb(23 23 19 / 0.12);
+    padding-inline: 1.5rem;
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  /* The lime highlight chip behind a hero word (wireframe h1 .hl) */
+  .hl-chip {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    display: inline-block; /* chip height = line height, so it never bleeds into the line above */
+    padding: 0 0.12em;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+  }
+}
